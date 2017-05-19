@@ -4,7 +4,7 @@
  */
 import {Resource,ResourceController,$,EventEmitterFactory,DataOptions} from "@haztivity/core";
 import "jquery-ui-dist/jquery-ui.js";
-import "jq-fillgaps";
+import "jqFillgaps";
 @Resource(
     {
         name:"HzFillgaps",
@@ -48,6 +48,7 @@ export class HzFillgapsResource extends ResourceController {
         if(this._fillgapsInstance){
             this._fillgapsInstance.destroy();
         }
+        debugger;
         let fillgapsOptions = this._DataOptions.getDataOptions(this._$element, "hz-fillgaps");
         this._options.fillgapsOptions = this._$.extend(true,{},HzFillgapsResource.DEFAULTS, fillgapsOptions);
         this._$element.fillgaps(this._options.fillgapsOptions);
