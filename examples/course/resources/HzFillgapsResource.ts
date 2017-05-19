@@ -48,11 +48,10 @@ export class HzFillgapsResource extends ResourceController {
         if(this._fillgapsInstance){
             this._fillgapsInstance.destroy();
         }
-        debugger;
         let fillgapsOptions = this._DataOptions.getDataOptions(this._$element, "hz-fillgaps");
         this._options.fillgapsOptions = this._$.extend(true,{},HzFillgapsResource.DEFAULTS, fillgapsOptions);
         this._$element.fillgaps(this._options.fillgapsOptions);
-        this._fillgapsInstance = this._$element.data("fillgapsModel");
+        this._fillgapsInstance = this._$element.data("hzFillgaps");
         this._assignEvents();
     }
 
@@ -61,18 +60,18 @@ export class HzFillgapsResource extends ResourceController {
     }
     public disable(){
         if(super.disable()){
-
+            this._fillgapsInstance.disable();
         }
     }
     public enable(){
         if(super.enable()){
-
+            this._fillgapsInstance.enable();
         }
     }
 
     protected _assignEvents(){
         this._$element.off("."+HzFillgapsResource.NAMESPACE)
-            .one("fillgaps:done."+HzFillgapsResource.NAMESPACE,this._onFlipDone.bind(this))
+            .one("fillgaps:completed."+HzFillgapsResource.NAMESPACE,this._onFlipDone.bind(this))
             .on("click."+HzFillgapsResource.NAMESPACE+" hover."+HzFillgapsResource.NAMESPACE,">*",this._onInteraction.bind(this));
     }
     protected _onInteraction(e){

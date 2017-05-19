@@ -23,3 +23,8 @@ page.on(
         Prism.highlightAll(false);
     }
 );
+page.on(
+    PageController.ON_COMPLETE_CHANGE, null, (eventObject, $page, $oldPage, oldPageRelativePosition, pageController) => {
+        console.log("Completed change");
+    }
+);
