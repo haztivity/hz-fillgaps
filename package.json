@@ -25,7 +25,7 @@
   "homepage": "https://github.com/haztivity/hz-fillgaps/",
   "dependencies": {
     "@haztivity/core": "^0.6.2",
-    "jq-fillgaps": "^0.1.0",
+    "jq-fillgaps": "^0.2.0",
     "jquery-ui-dist": "^1.12.1"
   },
   "devDependencies": {

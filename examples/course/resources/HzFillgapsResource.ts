@@ -4,7 +4,7 @@
  */
 import {Resource,ResourceController,$,EventEmitterFactory,DataOptions} from "@haztivity/core";
 import "jquery-ui-dist/jquery-ui.js";
-import "jqFillgaps";
+import "jq-fillgaps";
 @Resource(
     {
         name:"HzFillgaps",

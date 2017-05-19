@@ -2,12 +2,9 @@
  * @license
  * Copyright Davinchi. All Rights Reserved.
  */
-/**
- * @license
- * Copyright Davinchi. All Rights Reserved.
- */
 import {Resource,ResourceController,$,EventEmitterFactory,DataOptions} from "@haztivity/core";
-import "jqFillgaps";
+import "jquery-ui-dist/jquery-ui.js";
+import "jq-fillgaps";
 @Resource(
     {
         name:"HzFillgaps",
@@ -51,10 +48,11 @@ export class HzFillgapsResource extends ResourceController {
         if(this._fillgapsInstance){
             this._fillgapsInstance.destroy();
         }
-        let flipOptions = this._DataOptions.getDataOptions(this._$element, "hz-fillgaps");
-        this._options.flipOptions = this._$.extend(true,{},HzFillgapsResource.DEFAULTS, flipOptions);
-        this._$element.flip(this._options.flipOptions);
-        this._fillgapsInstance = this._$element.data("flipModel");
+        debugger;
+        let fillgapsOptions = this._DataOptions.getDataOptions(this._$element, "hz-fillgaps");
+        this._options.fillgapsOptions = this._$.extend(true,{},HzFillgapsResource.DEFAULTS, fillgapsOptions);
+        this._$element.fillgaps(this._options.fillgapsOptions);
+        this._fillgapsInstance = this._$element.data("fillgapsModel");
         this._assignEvents();
     }
 
@@ -74,7 +72,7 @@ export class HzFillgapsResource extends ResourceController {
 
     protected _assignEvents(){
         this._$element.off("."+HzFillgapsResource.NAMESPACE)
-            .one("flip:done."+HzFillgapsResource.NAMESPACE,this._onFlipDone.bind(this))
+            .one("fillgaps:done."+HzFillgapsResource.NAMESPACE,this._onFlipDone.bind(this))
             .on("click."+HzFillgapsResource.NAMESPACE+" hover."+HzFillgapsResource.NAMESPACE,">*",this._onInteraction.bind(this));
     }
     protected _onInteraction(e){
