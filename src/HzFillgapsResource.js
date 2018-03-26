@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@haztivity/core");
 require("jquery-ui-dist/jquery-ui.js");
 require("jq-fillgaps");
-var HzFillgapsResource = HzFillgapsResource_1 = (function (_super) {
+var HzFillgapsResource = /** @class */ (function (_super) {
     __extends(HzFillgapsResource, _super);
     /**
      * Recurso de tooltip para Haztivity.
@@ -37,6 +37,7 @@ var HzFillgapsResource = HzFillgapsResource_1 = (function (_super) {
         _this._DataOptions = _DataOptions;
         return _this;
     }
+    HzFillgapsResource_1 = HzFillgapsResource;
     HzFillgapsResource.prototype.init = function (options, config) {
         this._config = config;
         this._id = new Date().getTime();
@@ -48,11 +49,10 @@ var HzFillgapsResource = HzFillgapsResource_1 = (function (_super) {
         if (this._fillgapsInstance) {
             this._fillgapsInstance.destroy();
         }
-        debugger;
         var fillgapsOptions = this._DataOptions.getDataOptions(this._$element, "hz-fillgaps");
         this._options.fillgapsOptions = this._$.extend(true, {}, HzFillgapsResource_1.DEFAULTS, fillgapsOptions);
         this._$element.fillgaps(this._options.fillgapsOptions);
-        this._fillgapsInstance = this._$element.data("fillgapsModel");
+        this._fillgapsInstance = this._$element.data("hzFillgaps");
         this._assignEvents();
     };
     HzFillgapsResource.prototype.getInstance = function () {
@@ -60,15 +60,17 @@ var HzFillgapsResource = HzFillgapsResource_1 = (function (_super) {
     };
     HzFillgapsResource.prototype.disable = function () {
         if (_super.prototype.disable.call(this)) {
+            this._fillgapsInstance.disable();
         }
     };
     HzFillgapsResource.prototype.enable = function () {
         if (_super.prototype.enable.call(this)) {
+            this._fillgapsInstance.enable();
         }
     };
     HzFillgapsResource.prototype._assignEvents = function () {
         this._$element.off("." + HzFillgapsResource_1.NAMESPACE)
-            .one("fillgaps:done." + HzFillgapsResource_1.NAMESPACE, this._onFlipDone.bind(this))
+            .one("fillgaps:completed." + HzFillgapsResource_1.NAMESPACE, this._onFlipDone.bind(this))
             .on("click." + HzFillgapsResource_1.NAMESPACE + " hover." + HzFillgapsResource_1.NAMESPACE, ">*", this._onInteraction.bind(this));
     };
     HzFillgapsResource.prototype._onInteraction = function (e) {
@@ -84,20 +86,20 @@ var HzFillgapsResource = HzFillgapsResource_1 = (function (_super) {
         }
         _super.prototype.destroy.call(this);
     };
+    HzFillgapsResource.DEFAULTS = {};
+    HzFillgapsResource.NAMESPACE = "hzFillgaps";
+    HzFillgapsResource = HzFillgapsResource_1 = __decorate([
+        core_1.Resource({
+            name: "HzFillgaps",
+            dependencies: [
+                core_1.$,
+                core_1.EventEmitterFactory,
+                core_1.DataOptions
+            ]
+        })
+    ], HzFillgapsResource);
     return HzFillgapsResource;
+    var HzFillgapsResource_1;
 }(core_1.ResourceController));
-HzFillgapsResource.DEFAULTS = {};
-HzFillgapsResource.NAMESPACE = "hzFillgaps";
-HzFillgapsResource = HzFillgapsResource_1 = __decorate([
-    core_1.Resource({
-        name: "HzFillgaps",
-        dependencies: [
-            core_1.$,
-            core_1.EventEmitterFactory,
-            core_1.DataOptions
-        ]
-    })
-], HzFillgapsResource);
 exports.HzFillgapsResource = HzFillgapsResource;
-var HzFillgapsResource_1;
 //# sourceMappingURL=HzFillgapsResource.js.map
